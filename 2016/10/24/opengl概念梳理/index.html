@@ -6,29 +6,19 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <title>opengl概念梳理 | 靠谱点记笔记好么^_^</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="没有接触过计算机图形学，概念完全懵逼，现从opengl es入门进行学习，梳理一下相关概念。https://learnopengl-cn.github.io
-
-图形渲染管线OpenGL ES通过顶点缓存数组和图元绘制指令，形成基本的图元；图元在顶点着色器会进行顶点变换，也就是几何处理阶段的几何变换和投影变换；到了像素处理阶段，根据之前的结果，通过光照、纹理等对每一个像素点进行着色。
-
-顶点着色器">
+  <meta name="description" content="没有接触过计算机图形学，概念完全懵逼，现从opengl es入门进行学习，梳理一下相关概念。https://learnopengl-cn.github.io  图形渲染管线OpenGL ES通过顶点缓存数组和图元绘制指令，形成基本的图元；图元在顶点着色器会进行顶点变换，也就是几何处理阶段的几何变换和投影变换；到了像素处理阶段，根据之前的结果，通过光照、纹理等对每一个像素点进行着色。  顶点着色器">
+<meta name="keywords" content="opengl es,图形学">
 <meta property="og:type" content="article">
 <meta property="og:title" content="opengl概念梳理">
 <meta property="og:url" content="http://chencrstu.github.io/2016/10/24/opengl概念梳理/index.html">
 <meta property="og:site_name" content="靠谱点记笔记好么^_^">
-<meta property="og:description" content="没有接触过计算机图形学，概念完全懵逼，现从opengl es入门进行学习，梳理一下相关概念。https://learnopengl-cn.github.io
-
-图形渲染管线OpenGL ES通过顶点缓存数组和图元绘制指令，形成基本的图元；图元在顶点着色器会进行顶点变换，也就是几何处理阶段的几何变换和投影变换；到了像素处理阶段，根据之前的结果，通过光照、纹理等对每一个像素点进行着色。
-
-顶点着色器">
+<meta property="og:description" content="没有接触过计算机图形学，概念完全懵逼，现从opengl es入门进行学习，梳理一下相关概念。https://learnopengl-cn.github.io  图形渲染管线OpenGL ES通过顶点缓存数组和图元绘制指令，形成基本的图元；图元在顶点着色器会进行顶点变换，也就是几何处理阶段的几何变换和投影变换；到了像素处理阶段，根据之前的结果，通过光照、纹理等对每一个像素点进行着色。  顶点着色器">
+<meta property="og:locale" content="default">
 <meta property="og:image" content="https://learnopengl-cn.github.io/img/01/04/pipeline.png">
 <meta property="og:updated_time" content="2016-11-05T11:51:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="opengl概念梳理">
-<meta name="twitter:description" content="没有接触过计算机图形学，概念完全懵逼，现从opengl es入门进行学习，梳理一下相关概念。https://learnopengl-cn.github.io
-
-图形渲染管线OpenGL ES通过顶点缓存数组和图元绘制指令，形成基本的图元；图元在顶点着色器会进行顶点变换，也就是几何处理阶段的几何变换和投影变换；到了像素处理阶段，根据之前的结果，通过光照、纹理等对每一个像素点进行着色。
-
-顶点着色器">
+<meta name="twitter:description" content="没有接触过计算机图形学，概念完全懵逼，现从opengl es入门进行学习，梳理一下相关概念。https://learnopengl-cn.github.io  图形渲染管线OpenGL ES通过顶点缓存数组和图元绘制指令，形成基本的图元；图元在顶点着色器会进行顶点变换，也就是几何处理阶段的几何变换和投影变换；到了像素处理阶段，根据之前的结果，通过光照、纹理等对每一个像素点进行着色。  顶点着色器">
 <meta name="twitter:image" content="https://learnopengl-cn.github.io/img/01/04/pipeline.png">
   
     <link rel="alternative" href="/atom.xml" title="靠谱点记笔记好么^_^" type="application/atom+xml">
@@ -149,13 +139,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote><p>没有接触过计算机图形学，概念完全懵逼，现从opengl es入门进行学习，梳理一下相关概念。<br><a href="https://learnopengl-cn.github.io" target="_blank" rel="external">https://learnopengl-cn.github.io</a></p>
+        <blockquote><p>没有接触过计算机图形学，概念完全懵逼，现从opengl es入门进行学习，梳理一下相关概念。<br><a href="https://learnopengl-cn.github.io" target="_blank" rel="noopener">https://learnopengl-cn.github.io</a></p>
 </blockquote>
 <h3 id="图形渲染管线"><a href="#图形渲染管线" class="headerlink" title="图形渲染管线"></a>图形渲染管线</h3><p>OpenGL ES通过顶点缓存数组和图元绘制指令，形成基本的图元；图元在顶点着色器会进行顶点变换，也就是几何处理阶段的几何变换和投影变换；到了像素处理阶段，根据之前的结果，通过光照、纹理等对每一个像素点进行着色。</p>
 <img src="https://learnopengl-cn.github.io/img/01/04/pipeline.png" title="[300] [300]">
 <p><code>顶点着色器</code> 局部坐标-&gt;世界坐标-&gt;观察坐标-&gt;裁剪坐标-&gt;屏幕坐标<br><code>图元装配</code>   装配为指定几何形状<br><code>几何着色器</code> 产生新的顶点生成新的图元<br><code>光栅化</code>     将图元映射为屏幕上的相应像素，生成Fragment(渲染一个像素所需要的所有数据)<br><code>裁剪</code>        丢弃超出视图外的像素<br><code>片段着色器</code>     计算一个像素最终的颜色     （光照，阴影，光的颜色）<br><code>透明度测试和混合</code>     检测片段对应的深度（是否丢弃）,检测alpha（是否混合）</p>
 <h3 id="顶点输入"><a href="#顶点输入" class="headerlink" title="顶点输入"></a>顶点输入</h3><p>使用VBO（Vertex Buffer Objects）顶点缓存对象管理显存中的顶点数据，告诉显存如何读取输入的模型数据<br>使用VAO（Vertex Array Objects）顶点数组对象管理VBO的状态，通过bind操作恢复VBO状态，可以使不同顶点数据和属性配置之间切换变得非常简单<br>EBO（Element Buffer Objects）索引缓存对象，避免同一个顶点数据的重复输入</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">GLuint VBO;</div><div class="line">glGenBuffers(<span class="number">1</span>, &amp;VBO);</div><div class="line">GLuint VAO;</div><div class="line">glGenBuffers(<span class="number">1</span>, &amp;VAO);</div><div class="line"><span class="comment">// ..:: 初始化代码（只运行一次 (除非你的物体频繁改变)） :: ..</span></div><div class="line"><span class="comment">// 1. 绑定VAO</span></div><div class="line">glBindVertexArray(VAO);</div><div class="line">    <span class="comment">// 2. 把顶点数组复制到缓冲中供OpenGL使用</span></div><div class="line">    glBindBuffer(GL_ARRAY_BUFFER, VBO);</div><div class="line">    glBufferData(GL_ARRAY_BUFFER, <span class="keyword">sizeof</span>(vertices), vertices, GL_STATIC_DRAW);</div><div class="line">    <span class="comment">// 3. 设置顶点属性指针</span></div><div class="line">    glVertexAttribPointer(<span class="number">0</span>, <span class="number">3</span>, GL_FLOAT, GL_FALSE, <span class="number">3</span> * <span class="keyword">sizeof</span>(GLfloat), (GLvoid*)<span class="number">0</span>);</div><div class="line">    glEnableVertexAttribArray(<span class="number">0</span>);</div><div class="line"><span class="comment">//4. 解绑VAO</span></div><div class="line">glBindVertexArray(<span class="number">0</span>);</div><div class="line">[...]</div><div class="line"><span class="comment">// ..:: 绘制代码（循环中） :: ..</span></div><div class="line"><span class="comment">// 5. 绘制物体</span></div><div class="line">glUseProgram(shaderProgram);</div><div class="line">glBindVertexArray(VAO);</div><div class="line">someOpenGLFunctionThatDrawsOurTriangle();</div><div class="line">glBindVertexArray(<span class="number">0</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">GLuint VBO;</span><br><span class="line">glGenBuffers(<span class="number">1</span>, &amp;VBO);</span><br><span class="line">GLuint VAO;</span><br><span class="line">glGenBuffers(<span class="number">1</span>, &amp;VAO);</span><br><span class="line"><span class="comment">// ..:: 初始化代码（只运行一次 (除非你的物体频繁改变)） :: ..</span></span><br><span class="line"><span class="comment">// 1. 绑定VAO</span></span><br><span class="line">glBindVertexArray(VAO);</span><br><span class="line">    <span class="comment">// 2. 把顶点数组复制到缓冲中供OpenGL使用</span></span><br><span class="line">    glBindBuffer(GL_ARRAY_BUFFER, VBO);</span><br><span class="line">    glBufferData(GL_ARRAY_BUFFER, <span class="keyword">sizeof</span>(vertices), vertices, GL_STATIC_DRAW);</span><br><span class="line">    <span class="comment">// 3. 设置顶点属性指针</span></span><br><span class="line">    glVertexAttribPointer(<span class="number">0</span>, <span class="number">3</span>, GL_FLOAT, GL_FALSE, <span class="number">3</span> * <span class="keyword">sizeof</span>(GLfloat), (GLvoid*)<span class="number">0</span>);</span><br><span class="line">    glEnableVertexAttribArray(<span class="number">0</span>);</span><br><span class="line"><span class="comment">//4. 解绑VAO</span></span><br><span class="line">glBindVertexArray(<span class="number">0</span>);</span><br><span class="line">[...]</span><br><span class="line"><span class="comment">// ..:: 绘制代码（循环中） :: ..</span></span><br><span class="line"><span class="comment">// 5. 绘制物体</span></span><br><span class="line">glUseProgram(shaderProgram);</span><br><span class="line">glBindVertexArray(VAO);</span><br><span class="line">someOpenGLFunctionThatDrawsOurTriangle();</span><br><span class="line">glBindVertexArray(<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
 <h3 id="着色器程序"><a href="#着色器程序" class="headerlink" title="着色器程序"></a>着色器程序</h3><p>着色器是运行在GPU上的小程序，为了图形渲染管线的某个特定部分而运行。<br>shader language目前有3种主流语言，基于OpenGL的GLSL，基于Direct3D的HLSL，还有NVIDIA公司的Cg语言。</p>
 <h4 id="1、着色器程序的编译使用"><a href="#1、着色器程序的编译使用" class="headerlink" title="1、着色器程序的编译使用"></a>1、着色器程序的编译使用</h4><p>文件读取着色器程序字符串<br>创建着色器对象并使用<br>获取顶点着色器（片段着色器）输入变量位置<br>在每一帧去更新输入变量</p>
 <h4 id="2、GLSL语言"><a href="#2、GLSL语言" class="headerlink" title="2、GLSL语言"></a>2、GLSL语言</h4><table>
@@ -192,14 +182,14 @@
 <h3 id="纹理（Texture）"><a href="#纹理（Texture）" class="headerlink" title="纹理（Texture）"></a>纹理（Texture）</h3><p>纹理坐标[0,1]<br>纹理环绕（纹理坐标超出[0,1]时的取色方式）<br>GL_REPEAT     重复图像<br>GL_MIRRORED_REPEAT     镜像重复<br>GL_CLAMP_TO_EDGE     边缘拉伸<br>GL_CLAMP_TO_BORDER     边缘颜色指定</p>
 <p>纹理过滤(纹理坐标取色方式)<br>GL_NEAREST     取最接近纹理坐标的像素点<br>GL_LINER     取周围像素点的混合色</p>
 <p>多级渐远纹理<br>根据纹理生成一系列的纹理图像，后一个纹理是前者的二分之一。<br>根据观察者的距离，OpenGL会采用不同的纹理。</p>
-<p>纹理的加载创建<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">GLuint texName;</div><div class="line"><span class="comment">// 绑定纹理</span></div><div class="line">glGenTextures(<span class="number">1</span>, &amp;texName);</div><div class="line">glBindTexture(GL_TEXTURE_2D, texName);</div><div class="line"><span class="comment">// 设置纹理参数</span></div><div class="line">glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);</div><div class="line"><span class="comment">// 载入图片数据生成纹理</span></div><div class="line">glTexImage2D(GL_TEXTURE_2D, <span class="number">0</span>, GL_RGBA, (<span class="keyword">int</span>)width, (<span class="keyword">int</span>)height, <span class="number">0</span>, GL_RGBA, GL_UNSIGNED_BYTE, spriteData);</div></pre></td></tr></table></figure></p>
+<p>纹理的加载创建<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">GLuint texName;</span><br><span class="line"><span class="comment">// 绑定纹理</span></span><br><span class="line">glGenTextures(<span class="number">1</span>, &amp;texName);</span><br><span class="line">glBindTexture(GL_TEXTURE_2D, texName);</span><br><span class="line"><span class="comment">// 设置纹理参数</span></span><br><span class="line">glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);</span><br><span class="line"><span class="comment">// 载入图片数据生成纹理</span></span><br><span class="line">glTexImage2D(GL_TEXTURE_2D, <span class="number">0</span>, GL_RGBA, (<span class="keyword">int</span>)width, (<span class="keyword">int</span>)height, <span class="number">0</span>, GL_RGBA, GL_UNSIGNED_BYTE, spriteData);</span><br></pre></td></tr></table></figure></p>
 <p>纹理应用<br>纹理坐标一般来说跟顶点坐标、颜色RGBA值被包装成顶点属性一起输入。</p>
 <p>纹理单元<br>显卡中有N个纹理单元（具体数目依赖你的显卡能力），每个纹理单元（GL_TEXTURE0、GL_TEXTURE1等）都有GL_TEXTURE_1D、GL_TEXTURE_2D等</p>
 <p>glActiveTexture 选择当前活跃的纹理单元<br>glBindTexture 绑定当前纹理单元<br>glUniform1i 绑定纹理到对应的纹理单元</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">glActiveTexture(GL_TEXTURE0);</div><div class="line">glBindTexture(GL_TEXTURE_2D, texture1);</div><div class="line">glUniform1i(glGetUniformLocation(ourShader.Program, <span class="string">"ourTexture1"</span>), <span class="number">0</span>);</div><div class="line">glActiveTexture(GL_TEXTURE1);</div><div class="line">glBindTexture(GL_TEXTURE_2D, texture2);</div><div class="line">glUniform1i(glGetUniformLocation(ourShader.Program, <span class="string">"ourTexture2"</span>), <span class="number">1</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">glActiveTexture(GL_TEXTURE0);</span><br><span class="line">glBindTexture(GL_TEXTURE_2D, texture1);</span><br><span class="line">glUniform1i(glGetUniformLocation(ourShader.Program, <span class="string">"ourTexture1"</span>), <span class="number">0</span>);</span><br><span class="line">glActiveTexture(GL_TEXTURE1);</span><br><span class="line">glBindTexture(GL_TEXTURE_2D, texture2);</span><br><span class="line">glUniform1i(glGetUniformLocation(ourShader.Program, <span class="string">"ourTexture2"</span>), <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
 <h3 id="坐标系统"><a href="#坐标系统" class="headerlink" title="坐标系统"></a>坐标系统</h3><p>局部空间<br>世界空间        平移、缩放、旋转变换矩阵<br>观察空间        lookat矩阵<br>裁剪空间        投影矩阵<br>视口转换        glViewPort<br>深度测试        Z缓冲区</p>
 <h3 id="摄像机"><a href="#摄像机" class="headerlink" title="摄像机"></a>摄像机</h3><p>平移      摄像机位置       目标位置        上向量<br>视角移动<br>欧拉角     俯仰角pitch        偏航角yaw</p>
-<h3 id="模型加载"><a href="#模型加载" class="headerlink" title="模型加载"></a>模型加载</h3><p>assimp库 <a href="https://github.com/assimp/assimp" target="_blank" rel="external">https://github.com/assimp/assimp</a>    支持FBX OBJ等通用模型格式导入<br>使用CMake编译适用于不同平台的应用</p>
+<h3 id="模型加载"><a href="#模型加载" class="headerlink" title="模型加载"></a>模型加载</h3><p>assimp库 <a href="https://github.com/assimp/assimp" target="_blank" rel="noopener">https://github.com/assimp/assimp</a>    支持FBX OBJ等通用模型格式导入<br>使用CMake编译适用于不同平台的应用</p>
 
       
     </div>
@@ -275,7 +265,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2016 ccr
+    		&copy; 2018 ccr
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten

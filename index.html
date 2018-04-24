@@ -12,6 +12,7 @@
 <meta property="og:url" content="http://chencrstu.github.io/index.html">
 <meta property="og:site_name" content="靠谱点记笔记好么^_^">
 <meta property="og:description" content="evernote只支持两个设备同步笔记了(* ￣︿￣)，直接建个博客吧。。。">
+<meta property="og:locale" content="default">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="靠谱点记笔记好么^_^">
 <meta name="twitter:description" content="evernote只支持两个设备同步笔记了(* ￣︿￣)，直接建个博客吧。。。">
@@ -118,6 +119,79 @@
       <div class="body-wrap">
         
   
+    <article id="post-编译到出包的过程" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/24/编译到出包的过程/">编译到出包的过程</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote><p>最新在折腾项目打包相关工作，包括framework，ipa的打包等，特记录如下。</p>
+</blockquote>
+<h4 id="从源码到ipa包："><a href="#从源码到ipa包：" class="headerlink" title="从源码到ipa包："></a>从源码到ipa包：</h4><ol>
+<li>xcodebuild archive<br>负责将源代码编译成xxx.app，根据实际情况加上-workspace, -project, -configuration, -archivePath等参数</li>
+<li>xcodebuild -exportArchive<br>负责将xxx.app签名并打包成xxx.ipa</li>
+</ol>
+<h4 id="细化一下步骤："><a href="#细化一下步骤：" class="headerlink" title="细化一下步骤："></a>细化一下步骤：</h4><ol>
+<li>CompileC使用clang编译每个源代码文件</li>
+<li>LD将编译后的源代码文件进行链接操作，针对不同的机器架构生成不同的机器码</li>
+<li>lipo创建通用库</li>
+<li>ibtool处理storyboard，actool处理Assets文件</li>
+<li>dsymutil生成DSYM文件，其中存储函数地址映射，通过DSYM文件就可以通过崩溃的调用栈得到具体的函数位置，编译排查crash问题。</li>
+<li>codesign进行签名验证</li>
+</ol>
+<h4 id="一些命令"><a href="#一些命令" class="headerlink" title="一些命令:"></a>一些命令:</h4><ol>
+<li><p>xcodebuild clean build CODE_SIGN_IDENTITY=”” CODE_SIGNING_REQUIRED=NO -target “${FRAMEWORK_NAME}” -configuration Release -arch arm64 -arch armv7 -arch armv7s only_active_arch=no defines_module=yes -sdk “iphoneos” | xcpretty<br>生成只支持arm架构，不带签名信息的framework</p>
+</li>
+<li><p>lipo -create -output ${all} ${arm64} ${x86}<br>生成支持arm、x86架构的通用库</p>
+</li>
+<li><p>dsymutil  ${xxx.app} -o ${xxx.dDSYM}<br>根据.app生成.dsym</p>
+</li>
+<li><p>codesign -v ${xxx.app | xxx.framework}<br>查看签名信息</p>
+</li>
+</ol>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2018/04/24/编译到出包的过程/" class="archive-article-date">
+  	<time datetime="2018-04-24T08:07:13.000Z" itemprop="datePublished"><i class="icon-clock"></i>2018-04-24</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-泰国行" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -137,13 +211,13 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="12-10-周六"><a href="#12-10-周六" class="headerlink" title="12.10    周六"></a>12.10    周六</h3><p>杭州萧山到清迈的飞机上（22:40出发，2.5小时）→星星酒店</p>
-<p>清迈机场到星星酒店接机 <a href="http://www.mafengwo.cn/localdeals/1000590.html?cid=1010609" target="_blank" rel="external">http://www.mafengwo.cn/localdeals/1000590.html?cid=1010609</a></p>
+<p>清迈机场到星星酒店接机 <a href="http://www.mafengwo.cn/localdeals/1000590.html?cid=1010609" target="_blank" rel="noopener">http://www.mafengwo.cn/localdeals/1000590.html?cid=1010609</a></p>
 <center><br><img src="/img/12.10.png" title="[150] [150]"><br></center>
 
-<h3 id="12-11-周日"><a href="#12-11-周日" class="headerlink" title="12.11    周日"></a>12.11    周日</h3><p>星星酒店→塔佩门（1小时）→切迪隆寺（1小时）→整个清迈古城→星星酒店（休息晚饭）→周日夜市（2小时）<br>周日夜市<a href="http://www.mafengwo.cn/poi/5422413.html" target="_blank" rel="external">http://www.mafengwo.cn/poi/5422413.html</a></p>
+<h3 id="12-11-周日"><a href="#12-11-周日" class="headerlink" title="12.11    周日"></a>12.11    周日</h3><p>星星酒店→塔佩门（1小时）→切迪隆寺（1小时）→整个清迈古城→星星酒店（休息晚饭）→周日夜市（2小时）<br>周日夜市<a href="http://www.mafengwo.cn/poi/5422413.html" target="_blank" rel="noopener">http://www.mafengwo.cn/poi/5422413.html</a></p>
 <center><br><img src="/img/12.11.png" title="[150] [150]"><br></center>
 
-<h3 id="12-12-周一"><a href="#12-12-周一" class="headerlink" title="12.12    周一"></a>12.12    周一</h3><p>宁曼路(1小时)→ 清迈大学(1小时) → 双龙寺(1小时) →素贴山(2小时)→ 蒲屏皇宫(1小时)→星星酒店（晚上休息）<br>双龙寺<a href="http://www.mafengwo.cn/poi/12549.html" target="_blank" rel="external">http://www.mafengwo.cn/poi/12549.html</a><br>蒲屏皇宫<a href="http://www.mafengwo.cn/poi/5628085.html" target="_blank" rel="external">http://www.mafengwo.cn/poi/5628085.html</a><br>清迈大学<a href="http://www.mafengwo.cn/poi/5423942.html" target="_blank" rel="external">http://www.mafengwo.cn/poi/5423942.html</a></p>
+<h3 id="12-12-周一"><a href="#12-12-周一" class="headerlink" title="12.12    周一"></a>12.12    周一</h3><p>宁曼路(1小时)→ 清迈大学(1小时) → 双龙寺(1小时) →素贴山(2小时)→ 蒲屏皇宫(1小时)→星星酒店（晚上休息）<br>双龙寺<a href="http://www.mafengwo.cn/poi/12549.html" target="_blank" rel="noopener">http://www.mafengwo.cn/poi/12549.html</a><br>蒲屏皇宫<a href="http://www.mafengwo.cn/poi/5628085.html" target="_blank" rel="noopener">http://www.mafengwo.cn/poi/5628085.html</a><br>清迈大学<a href="http://www.mafengwo.cn/poi/5423942.html" target="_blank" rel="noopener">http://www.mafengwo.cn/poi/5423942.html</a></p>
 <center><br><img src="/img/12.12.png" title="[150] [150]"><br></center>
 
 <h3 id="12-13-周二"><a href="#12-13-周二" class="headerlink" title="12.13    周二"></a>12.13    周二</h3><p>丛林飞跃(5小时，包含来回路程2小时)→星星酒店 →自由活动</p>
@@ -205,7 +279,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote><p>接着上篇学习opengl es光照<br><a href="https://learnopengl-cn.github.io/02%20Lighting/01%20Colors/" target="_blank" rel="external">https://learnopengl-cn.github.io/02%20Lighting/01%20Colors/</a></p>
+        <blockquote><p>接着上篇学习opengl es光照<br><a href="https://learnopengl-cn.github.io/02%20Lighting/01%20Colors/" target="_blank" rel="noopener">https://learnopengl-cn.github.io/02%20Lighting/01%20Colors/</a></p>
 </blockquote>
 <h4 id="经典光照模型"><a href="#经典光照模型" class="headerlink" title="经典光照模型"></a>经典光照模型</h4><p>反射和投射光的强度决定物体表面的亮度，其中包含不同波长光的比例决定物体表面的色彩。</p>
 <p>物体表面光照颜色由入射光、物体材质，材质和光的交互规律共同决定。</p>
@@ -263,13 +337,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote><p>没有接触过计算机图形学，概念完全懵逼，现从opengl es入门进行学习，梳理一下相关概念。<br><a href="https://learnopengl-cn.github.io" target="_blank" rel="external">https://learnopengl-cn.github.io</a></p>
+        <blockquote><p>没有接触过计算机图形学，概念完全懵逼，现从opengl es入门进行学习，梳理一下相关概念。<br><a href="https://learnopengl-cn.github.io" target="_blank" rel="noopener">https://learnopengl-cn.github.io</a></p>
 </blockquote>
 <h3 id="图形渲染管线"><a href="#图形渲染管线" class="headerlink" title="图形渲染管线"></a>图形渲染管线</h3><p>OpenGL ES通过顶点缓存数组和图元绘制指令，形成基本的图元；图元在顶点着色器会进行顶点变换，也就是几何处理阶段的几何变换和投影变换；到了像素处理阶段，根据之前的结果，通过光照、纹理等对每一个像素点进行着色。</p>
 <img src="https://learnopengl-cn.github.io/img/01/04/pipeline.png" title="[300] [300]">
 <p><code>顶点着色器</code> 局部坐标-&gt;世界坐标-&gt;观察坐标-&gt;裁剪坐标-&gt;屏幕坐标<br><code>图元装配</code>   装配为指定几何形状<br><code>几何着色器</code> 产生新的顶点生成新的图元<br><code>光栅化</code>     将图元映射为屏幕上的相应像素，生成Fragment(渲染一个像素所需要的所有数据)<br><code>裁剪</code>        丢弃超出视图外的像素<br><code>片段着色器</code>     计算一个像素最终的颜色     （光照，阴影，光的颜色）<br><code>透明度测试和混合</code>     检测片段对应的深度（是否丢弃）,检测alpha（是否混合）</p>
 <h3 id="顶点输入"><a href="#顶点输入" class="headerlink" title="顶点输入"></a>顶点输入</h3><p>使用VBO（Vertex Buffer Objects）顶点缓存对象管理显存中的顶点数据，告诉显存如何读取输入的模型数据<br>使用VAO（Vertex Array Objects）顶点数组对象管理VBO的状态，通过bind操作恢复VBO状态，可以使不同顶点数据和属性配置之间切换变得非常简单<br>EBO（Element Buffer Objects）索引缓存对象，避免同一个顶点数据的重复输入</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">GLuint VBO;</div><div class="line">glGenBuffers(<span class="number">1</span>, &amp;VBO);</div><div class="line">GLuint VAO;</div><div class="line">glGenBuffers(<span class="number">1</span>, &amp;VAO);</div><div class="line"><span class="comment">// ..:: 初始化代码（只运行一次 (除非你的物体频繁改变)） :: ..</span></div><div class="line"><span class="comment">// 1. 绑定VAO</span></div><div class="line">glBindVertexArray(VAO);</div><div class="line">    <span class="comment">// 2. 把顶点数组复制到缓冲中供OpenGL使用</span></div><div class="line">    glBindBuffer(GL_ARRAY_BUFFER, VBO);</div><div class="line">    glBufferData(GL_ARRAY_BUFFER, <span class="keyword">sizeof</span>(vertices), vertices, GL_STATIC_DRAW);</div><div class="line">    <span class="comment">// 3. 设置顶点属性指针</span></div><div class="line">    glVertexAttribPointer(<span class="number">0</span>, <span class="number">3</span>, GL_FLOAT, GL_FALSE, <span class="number">3</span> * <span class="keyword">sizeof</span>(GLfloat), (GLvoid*)<span class="number">0</span>);</div><div class="line">    glEnableVertexAttribArray(<span class="number">0</span>);</div><div class="line"><span class="comment">//4. 解绑VAO</span></div><div class="line">glBindVertexArray(<span class="number">0</span>);</div><div class="line">[...]</div><div class="line"><span class="comment">// ..:: 绘制代码（循环中） :: ..</span></div><div class="line"><span class="comment">// 5. 绘制物体</span></div><div class="line">glUseProgram(shaderProgram);</div><div class="line">glBindVertexArray(VAO);</div><div class="line">someOpenGLFunctionThatDrawsOurTriangle();</div><div class="line">glBindVertexArray(<span class="number">0</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">GLuint VBO;</span><br><span class="line">glGenBuffers(<span class="number">1</span>, &amp;VBO);</span><br><span class="line">GLuint VAO;</span><br><span class="line">glGenBuffers(<span class="number">1</span>, &amp;VAO);</span><br><span class="line"><span class="comment">// ..:: 初始化代码（只运行一次 (除非你的物体频繁改变)） :: ..</span></span><br><span class="line"><span class="comment">// 1. 绑定VAO</span></span><br><span class="line">glBindVertexArray(VAO);</span><br><span class="line">    <span class="comment">// 2. 把顶点数组复制到缓冲中供OpenGL使用</span></span><br><span class="line">    glBindBuffer(GL_ARRAY_BUFFER, VBO);</span><br><span class="line">    glBufferData(GL_ARRAY_BUFFER, <span class="keyword">sizeof</span>(vertices), vertices, GL_STATIC_DRAW);</span><br><span class="line">    <span class="comment">// 3. 设置顶点属性指针</span></span><br><span class="line">    glVertexAttribPointer(<span class="number">0</span>, <span class="number">3</span>, GL_FLOAT, GL_FALSE, <span class="number">3</span> * <span class="keyword">sizeof</span>(GLfloat), (GLvoid*)<span class="number">0</span>);</span><br><span class="line">    glEnableVertexAttribArray(<span class="number">0</span>);</span><br><span class="line"><span class="comment">//4. 解绑VAO</span></span><br><span class="line">glBindVertexArray(<span class="number">0</span>);</span><br><span class="line">[...]</span><br><span class="line"><span class="comment">// ..:: 绘制代码（循环中） :: ..</span></span><br><span class="line"><span class="comment">// 5. 绘制物体</span></span><br><span class="line">glUseProgram(shaderProgram);</span><br><span class="line">glBindVertexArray(VAO);</span><br><span class="line">someOpenGLFunctionThatDrawsOurTriangle();</span><br><span class="line">glBindVertexArray(<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
 <h3 id="着色器程序"><a href="#着色器程序" class="headerlink" title="着色器程序"></a>着色器程序</h3><p>着色器是运行在GPU上的小程序，为了图形渲染管线的某个特定部分而运行。<br>shader language目前有3种主流语言，基于OpenGL的GLSL，基于Direct3D的HLSL，还有NVIDIA公司的Cg语言。</p>
 <h4 id="1、着色器程序的编译使用"><a href="#1、着色器程序的编译使用" class="headerlink" title="1、着色器程序的编译使用"></a>1、着色器程序的编译使用</h4><p>文件读取着色器程序字符串<br>创建着色器对象并使用<br>获取顶点着色器（片段着色器）输入变量位置<br>在每一帧去更新输入变量</p>
 <h4 id="2、GLSL语言"><a href="#2、GLSL语言" class="headerlink" title="2、GLSL语言"></a>2、GLSL语言</h4><table>
@@ -306,14 +380,14 @@
 <h3 id="纹理（Texture）"><a href="#纹理（Texture）" class="headerlink" title="纹理（Texture）"></a>纹理（Texture）</h3><p>纹理坐标[0,1]<br>纹理环绕（纹理坐标超出[0,1]时的取色方式）<br>GL_REPEAT     重复图像<br>GL_MIRRORED_REPEAT     镜像重复<br>GL_CLAMP_TO_EDGE     边缘拉伸<br>GL_CLAMP_TO_BORDER     边缘颜色指定</p>
 <p>纹理过滤(纹理坐标取色方式)<br>GL_NEAREST     取最接近纹理坐标的像素点<br>GL_LINER     取周围像素点的混合色</p>
 <p>多级渐远纹理<br>根据纹理生成一系列的纹理图像，后一个纹理是前者的二分之一。<br>根据观察者的距离，OpenGL会采用不同的纹理。</p>
-<p>纹理的加载创建<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">GLuint texName;</div><div class="line"><span class="comment">// 绑定纹理</span></div><div class="line">glGenTextures(<span class="number">1</span>, &amp;texName);</div><div class="line">glBindTexture(GL_TEXTURE_2D, texName);</div><div class="line"><span class="comment">// 设置纹理参数</span></div><div class="line">glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);</div><div class="line"><span class="comment">// 载入图片数据生成纹理</span></div><div class="line">glTexImage2D(GL_TEXTURE_2D, <span class="number">0</span>, GL_RGBA, (<span class="keyword">int</span>)width, (<span class="keyword">int</span>)height, <span class="number">0</span>, GL_RGBA, GL_UNSIGNED_BYTE, spriteData);</div></pre></td></tr></table></figure></p>
+<p>纹理的加载创建<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">GLuint texName;</span><br><span class="line"><span class="comment">// 绑定纹理</span></span><br><span class="line">glGenTextures(<span class="number">1</span>, &amp;texName);</span><br><span class="line">glBindTexture(GL_TEXTURE_2D, texName);</span><br><span class="line"><span class="comment">// 设置纹理参数</span></span><br><span class="line">glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);</span><br><span class="line"><span class="comment">// 载入图片数据生成纹理</span></span><br><span class="line">glTexImage2D(GL_TEXTURE_2D, <span class="number">0</span>, GL_RGBA, (<span class="keyword">int</span>)width, (<span class="keyword">int</span>)height, <span class="number">0</span>, GL_RGBA, GL_UNSIGNED_BYTE, spriteData);</span><br></pre></td></tr></table></figure></p>
 <p>纹理应用<br>纹理坐标一般来说跟顶点坐标、颜色RGBA值被包装成顶点属性一起输入。</p>
 <p>纹理单元<br>显卡中有N个纹理单元（具体数目依赖你的显卡能力），每个纹理单元（GL_TEXTURE0、GL_TEXTURE1等）都有GL_TEXTURE_1D、GL_TEXTURE_2D等</p>
 <p>glActiveTexture 选择当前活跃的纹理单元<br>glBindTexture 绑定当前纹理单元<br>glUniform1i 绑定纹理到对应的纹理单元</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">glActiveTexture(GL_TEXTURE0);</div><div class="line">glBindTexture(GL_TEXTURE_2D, texture1);</div><div class="line">glUniform1i(glGetUniformLocation(ourShader.Program, <span class="string">"ourTexture1"</span>), <span class="number">0</span>);</div><div class="line">glActiveTexture(GL_TEXTURE1);</div><div class="line">glBindTexture(GL_TEXTURE_2D, texture2);</div><div class="line">glUniform1i(glGetUniformLocation(ourShader.Program, <span class="string">"ourTexture2"</span>), <span class="number">1</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">glActiveTexture(GL_TEXTURE0);</span><br><span class="line">glBindTexture(GL_TEXTURE_2D, texture1);</span><br><span class="line">glUniform1i(glGetUniformLocation(ourShader.Program, <span class="string">"ourTexture1"</span>), <span class="number">0</span>);</span><br><span class="line">glActiveTexture(GL_TEXTURE1);</span><br><span class="line">glBindTexture(GL_TEXTURE_2D, texture2);</span><br><span class="line">glUniform1i(glGetUniformLocation(ourShader.Program, <span class="string">"ourTexture2"</span>), <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
 <h3 id="坐标系统"><a href="#坐标系统" class="headerlink" title="坐标系统"></a>坐标系统</h3><p>局部空间<br>世界空间        平移、缩放、旋转变换矩阵<br>观察空间        lookat矩阵<br>裁剪空间        投影矩阵<br>视口转换        glViewPort<br>深度测试        Z缓冲区</p>
 <h3 id="摄像机"><a href="#摄像机" class="headerlink" title="摄像机"></a>摄像机</h3><p>平移      摄像机位置       目标位置        上向量<br>视角移动<br>欧拉角     俯仰角pitch        偏航角yaw</p>
-<h3 id="模型加载"><a href="#模型加载" class="headerlink" title="模型加载"></a>模型加载</h3><p>assimp库 <a href="https://github.com/assimp/assimp" target="_blank" rel="external">https://github.com/assimp/assimp</a>    支持FBX OBJ等通用模型格式导入<br>使用CMake编译适用于不同平台的应用</p>
+<h3 id="模型加载"><a href="#模型加载" class="headerlink" title="模型加载"></a>模型加载</h3><p>assimp库 <a href="https://github.com/assimp/assimp" target="_blank" rel="noopener">https://github.com/assimp/assimp</a>    支持FBX OBJ等通用模型格式导入<br>使用CMake编译适用于不同平台的应用</p>
 
       
     </div>
@@ -363,32 +437,32 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote><p>本文对JSPatch的大部分原理介绍理解来自官方wiki。 <a href="https://github.com/bang590/JSPatch/wiki" target="_blank" rel="external">https://github.com/bang590/JSPatch/wiki</a><br>为了便于自己理解，特记录如下。</p>
+        <blockquote><p>本文对JSPatch的大部分原理介绍理解来自官方wiki。 <a href="https://github.com/bang590/JSPatch/wiki" target="_blank" rel="noopener">https://github.com/bang590/JSPatch/wiki</a><br>为了便于自己理解，特记录如下。</p>
 </blockquote>
 <p>JSPatch是当前iOS平台下的最热门的一个热更新框架，基于JavaScriptCore.framework和Objective-C中的runtime技术实现。可以通过JavaScript调用任何Objective-C接口，可以为项目添加小功能模块（关于大规模使用JSPatch开发，感觉效率会有问题）或替换项目原生代码修复线上BUG。</p>
 <h3 id="基础原理"><a href="#基础原理" class="headerlink" title="基础原理"></a>基础原理</h3><p>JSPatch 能做到通过 JS 调用和改写 OC 方法最根本的原因是 Objective-C 是动态语言，OC 上所有方法的调用/类的生成都通过 Objective-C Runtime 在运行时进行，我们可以通过类名/方法名反射得到相应的类和方法：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Class <span class="keyword">class</span> = <span class="built_in">NSClassFromString</span>(<span class="string">"UIViewController"</span>);</div><div class="line"><span class="keyword">id</span> viewController = [[<span class="keyword">class</span> alloc] init];</div><div class="line">SEL selector = <span class="built_in">NSSelectorFromString</span>(<span class="string">"viewDidLoad"</span>);</div><div class="line">[viewController performSelector:selector];</div></pre></td></tr></table></figure>
-<p>也可以替换某个类的方法为新的实现：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="keyword">void</span> newViewDidLoad(<span class="keyword">id</span> slf, SEL sel) &#123;&#125;</div><div class="line">class_replaceMethod(<span class="keyword">class</span>, selector, newViewDidLoad, <span class="string">@""</span>);</div></pre></td></tr></table></figure></p>
-<p>还可以新注册一个类，为类添加方法：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Class cls = objc_allocateClassPair(superCls, <span class="string">"JPObject"</span>, <span class="number">0</span>);</div><div class="line">objc_registerClassPair(cls);</div><div class="line">class_addMethod(cls, selector, implement, typedesc);</div></pre></td></tr></table></figure></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Class <span class="keyword">class</span> = <span class="built_in">NSClassFromString</span>(<span class="string">"UIViewController"</span>);</span><br><span class="line"><span class="keyword">id</span> viewController = [[<span class="keyword">class</span> alloc] init];</span><br><span class="line">SEL selector = <span class="built_in">NSSelectorFromString</span>(<span class="string">"viewDidLoad"</span>);</span><br><span class="line">[viewController performSelector:selector];</span><br></pre></td></tr></table></figure>
+<p>也可以替换某个类的方法为新的实现：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> newViewDidLoad(<span class="keyword">id</span> slf, SEL sel) &#123;&#125;</span><br><span class="line">class_replaceMethod(<span class="keyword">class</span>, selector, newViewDidLoad, <span class="string">@""</span>);</span><br></pre></td></tr></table></figure></p>
+<p>还可以新注册一个类，为类添加方法：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Class cls = objc_allocateClassPair(superCls, <span class="string">"JPObject"</span>, <span class="number">0</span>);</span><br><span class="line">objc_registerClassPair(cls);</span><br><span class="line">class_addMethod(cls, selector, implement, typedesc);</span><br></pre></td></tr></table></figure></p>
 <p>对于 Objective-C 对象模型和动态消息发送的原理已有很多文章阐述得很详细，这里就不详细阐述了。理论上你可以在运行时通过类名/方法名调用到任何 OC 方法，替换任何类的实现以及新增任意类。所以 JSPatch 的基本原理就是：JS 传递字符串给 OC，OC 通过 Runtime 接口调用和替换 OC 方法。这是最基础的原理，实际实现过程还有很多怪要打，接下来看看具体是怎样实现的。</p>
-<h2 id="方法调用"><a href="#方法调用" class="headerlink" title="方法调用"></a>方法调用</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">require</span>(<span class="string">'UIView'</span>)</div><div class="line"><span class="keyword">var</span> view = UIView.alloc().init()</div><div class="line">view.setBackgroundColor(<span class="built_in">require</span>(<span class="string">'UIColor'</span>).grayColor())</div><div class="line">view.setAlpha(<span class="number">0.5</span>)</div></pre></td></tr></table></figure>
+<h2 id="方法调用"><a href="#方法调用" class="headerlink" title="方法调用"></a>方法调用</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">'UIView'</span>)</span><br><span class="line"><span class="keyword">var</span> view = UIView.alloc().init()</span><br><span class="line">view.setBackgroundColor(<span class="built_in">require</span>(<span class="string">'UIColor'</span>).grayColor())</span><br><span class="line">view.setAlpha(<span class="number">0.5</span>)</span><br></pre></td></tr></table></figure>
 <p>引入 JSPatch 后，可以通过以上 JS 代码创建了一个 UIView 实例，并设置背景颜色和透明度，涵盖了 require 引入类，JS 调用接口，消息传递，对象持有和转换，参数转换这五个方面，接下来逐一看看具体实现。</p>
 <h3 id="1-require"><a href="#1-require" class="headerlink" title="1.require"></a>1.require</h3><p>调用 <code>require(&#39;UIView&#39;)</code> 后，就可以直接使用 <code>UIView</code> 这个变量去调用相应的类方法了，require 做的事很简单，就是在JS全局作用域上创建一个同名变量，变量指向一个对象，对象属性 <code>__clsName</code> 保存类名，同时表明这个对象是一个 OC Class。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> _require = <span class="function"><span class="keyword">function</span>(<span class="params">clsName</span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (!global[clsName]) &#123;</div><div class="line">    global[clsName] = &#123;</div><div class="line">      <span class="attr">__clsName</span>: clsName</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> global[clsName]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> _require = <span class="function"><span class="keyword">function</span>(<span class="params">clsName</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!global[clsName]) &#123;</span><br><span class="line">    global[clsName] = &#123;</span><br><span class="line">      __clsName: clsName</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> global[clsName]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>所以调用 <code>require(&#39;UIView&#39;)</code> 后，就在全局作用域生成了 <code>UIView</code> 这个变量，指向一个这样一个对象：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">__clsName</span>: <span class="string">"UIView"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  __clsName: <span class="string">"UIView"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="2-JS接口"><a href="#2-JS接口" class="headerlink" title="2.JS接口"></a>2.JS接口</h3><p>接下来看看 <code>UIView.alloc()</code> 是怎样调用的。</p>
 <h4 id="i-封装-JS-对象"><a href="#i-封装-JS-对象" class="headerlink" title="i.封装 JS 对象"></a>i.封装 JS 对象</h4><p>对于这个调用的实现，一开始我的想法是，根据JS特性，若要让 <code>UIView.alloc()</code> 这句调用不出错，唯一的方法就是给 <code>UIView</code> 这个对象添加 <code>alloc</code> 方法，不然是不可能调用成功的，JS 对于调用没定义的属性/变量，只会马上抛出异常，而不像 OC/Lua/ruby 那样会有转发机制。所以做了一个复杂的事，就是在require生成类对象时，把类名传入OC，OC 通过runtime方法找出这个类所有的方法返回给 JS，JS 类对象为每个方法名都生成一个函数，函数内容就是拿着方法名去 OC 调用相应方法。生成的 <code>UIView</code> 对象大致是这样的：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">__clsName</span>: <span class="string">"UIView"</span>,</div><div class="line">    <span class="attr">alloc</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;…&#125;,</div><div class="line">    <span class="attr">beginAnimations_context</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;…&#125;,</div><div class="line">    <span class="attr">setAnimationsEnabled</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;…&#125;,</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    __clsName: <span class="string">"UIView"</span>,</span><br><span class="line">    alloc: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;…&#125;,</span><br><span class="line">    beginAnimations_context: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;…&#125;,</span><br><span class="line">    setAnimationsEnabled: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;…&#125;,</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>实际上不仅要遍历当前类的所有方法，还要循环找父类的方法直到顶层，整个继承链上的所有方法都要加到JS对象上，一个类就有几百个方法，这样把方法全部加到 JS 对象上，碰到了挺严重的问题，引入几个类就内存暴涨，无法使用。后来为了优化内存问题还在 JS 搞了继承关系，不把继承链上所有方法都添加到一个JS对象，避免像基类 NSObject 的几百个方法反复添加在每个 JS 对象上，每个方法只存在一份，JS 对象复制了 OC 对象的继承关系，找方法时沿着继承链往上找，结果内存消耗是小了一些，但还是大到难以接受。</p>
 <h4 id="ii-c-元函数"><a href="#ii-c-元函数" class="headerlink" title="ii.__c()元函数"></a>ii.<code>__c()</code>元函数</h4><p>当时继续苦苦寻找解决方案，若按 JS 语法，这是唯一的方法，但若不按 JS 语法呢？突然脑洞开了下，CoffieScript/JSX 都可以用 JS 实现一个解释器实现自己的语法，我也可以通过类似的方式做到，再进一步想到其实我想要的效果很简单，就是调用一个不存在方法时，能转发到一个指定函数去执行，就能解决一切问题了，这其实可以用简单的字符串替换，把 JS 脚本里的方法调用都替换掉。最后的解决方案是，在 OC 执行 JS 脚本前，通过正则把所有方法调用都改成调用 <code>__c()</code> 函数，再执行这个 JS 脚本，做到了类似 OC/Lua/Ruby 等的消息转发机制：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">UIView.alloc().init()</div><div class="line">-&gt;</div><div class="line">UIView.__c(<span class="string">'alloc'</span>)().__c(<span class="string">'init'</span>)()</div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">UIView.alloc().init()</span><br><span class="line">-&gt;</span><br><span class="line">UIView.__c(<span class="string">'alloc'</span>)().__c(<span class="string">'init'</span>)()</span><br></pre></td></tr></table></figure>
 <p>给 JS 对象基类 Object 加上 <code>__c</code> 成员，这样所有对象都可以调用到 <code>__c</code>，根据当前对象类型判断进行不同操作：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">Object</span>.defineProperty(<span class="built_in">Object</span>.prototype, <span class="string">'__c'</span>, &#123;<span class="attr">value</span>: <span class="function"><span class="keyword">function</span>(<span class="params">methodName</span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (!<span class="keyword">this</span>.__obj &amp;&amp; !<span class="keyword">this</span>.__clsName) <span class="keyword">return</span> <span class="keyword">this</span>[methodName].bind(<span class="keyword">this</span>);</div><div class="line">  <span class="keyword">var</span> self = <span class="keyword">this</span></div><div class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> args = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>)</div><div class="line">    <span class="keyword">return</span> _methodFunc(self.__obj, self.__clsName, methodName, args, self.__isSuper)</div><div class="line">  &#125;</div><div class="line">&#125;&#125;)</div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.defineProperty(<span class="built_in">Object</span>.prototype, <span class="string">'__c'</span>, &#123;<span class="attr">value</span>: <span class="function"><span class="keyword">function</span>(<span class="params">methodName</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="keyword">this</span>.__obj &amp;&amp; !<span class="keyword">this</span>.__clsName) <span class="keyword">return</span> <span class="keyword">this</span>[methodName].bind(<span class="keyword">this</span>);</span><br><span class="line">  <span class="keyword">var</span> self = <span class="keyword">this</span></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> args = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>)</span><br><span class="line">    <span class="keyword">return</span> _methodFunc(self.__obj, self.__clsName, methodName, args, self.__isSuper)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;&#125;)</span><br></pre></td></tr></table></figure>
 <p><code>_methodFunc()</code> 就是把相关信息传给OC，OC用 Runtime 接口调用相应方法，返回结果值，这个调用就结束了。</p>
 <p>这样做不用去 OC 遍历对象方法，不用在 JS 对象保存这些方法，内存消耗直降 99%，这一步是做这个项目最爽的时候，用一个非常简单的方法解决了严重的问题，替换之前又复杂效果又差的实现。</p>
 <h3 id="3-消息传递"><a href="#3-消息传递" class="headerlink" title="3.消息传递"></a>3.消息传递</h3><p>解决了 JS 接口问题，接下来看看 JS 和 OC 是怎样互传消息的。这里用到了 JavaScriptCore 的接口，OC 端在启动 JSPatch 引擎时会创建一个 <code>JSContext</code> 实例，<code>JSContext</code> 是 JS 代码的执行环境，可以给 <code>JSContext</code> 添加方法，JS 就可以直接调用这个方法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">JSContext *context = [[JSContext alloc] init];</div><div class="line">context[@&quot;hello&quot;] = ^(NSString *msg) &#123;</div><div class="line">    NSLog(@&quot;hello %@&quot;, msg);</div><div class="line">&#125;;</div><div class="line">[_context evaluateScript:@&quot;hello(&apos;word&apos;)&quot;];     //output hello word</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">JSContext *context = [[JSContext alloc] init];</span><br><span class="line">context[@&quot;hello&quot;] = ^(NSString *msg) &#123;</span><br><span class="line">    NSLog(@&quot;hello %@&quot;, msg);</span><br><span class="line">&#125;;</span><br><span class="line">[_context evaluateScript:@&quot;hello(&apos;word&apos;)&quot;];     //output hello word</span><br></pre></td></tr></table></figure>
 <p>JS 通过调用 <code>JSContext</code> 定义的方法把数据传给 OC，OC 通过返回值传会给 JS。调用这种方法，它的参数/返回值 JavaScriptCore 都会自动转换，OC 里的 NSArray, NSDictionary, NSString, NSNumber, NSBlock 会分别转为JS端的数组/对象/字符串/数字/函数类型。上述 <code>_methodFunc</code> 方法就是这样把要调用的类名和方法名传递给 OC 的。</p>
 <h3 id="4-对象持有-转换"><a href="#4-对象持有-转换" class="headerlink" title="4.对象持有/转换"></a>4.对象持有/转换</h3><p>结合上述几点，可以知道 <code>UIView.alloc()</code> 这个类方法调用语句是怎样执行的：</p>
 <p>  a.<code>require(&#39;UIView&#39;)</code> 这句话在 JS 全局作用域生成了 <code>UIView</code> 这个对象，它有个属性叫 <code>__isCls</code>，表示这代表一个 OC 类。<br>  b.调用 <code>UIView</code> 这个对象的 <code>alloc()</code> 方法，会去到 <code>__c()</code> 函数，在这个函数里判断到调用者 <code>__isCls</code> 属性，知道它是代表 OC 类，把方法名和类名传递给 OC 完成调用。</p>
@@ -396,9 +470,9 @@
 <p>对于一个自定义id对象，JavaScriptCore 会把这个自定义对象的指针传给 JS，这个对象在 JS 无法使用，但在回传给 OC 时 OC 可以找到这个对象。对于这个对象生命周期的管理，按我的理解如果JS有变量引用时，这个 OC 对象引用计数就加1 ，JS 变量的引用释放了就减1，如果 OC 上没别的持有者，这个OC对象的生命周期就跟着 JS 走了，会在 JS 进行垃圾回收时释放。</p>
 <p>传回给 JS 的变量是这个 OC 对象的指针，这个指针也可以重新传回 OC，要在 JS 调用这个对象的某个实例方法，根据第2点 JS 接口的描述，只需在 <code>__c()</code> 函数里把这个对象指针以及它要调用的方法名传回给 OC 就行了，现在问题只剩下：怎样在 <code>__c()</code> 函数里判断调用者是一个 OC 对象指针？</p>
 <p>目前没找到方法判断一个 JS 对象是否表示 OC 指针，这里的解决方法是在 OC 把对象返回给 JS 之前，先把它包装成一个 NSDictionary：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="built_in">NSDictionary</span> *_wrapObj(<span class="keyword">id</span> obj) &#123;</div><div class="line">    <span class="keyword">return</span> @&#123;<span class="string">@"__obj"</span>: obj&#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="built_in">NSDictionary</span> *_wrapObj(<span class="keyword">id</span> obj) &#123;</span><br><span class="line">    <span class="keyword">return</span> @&#123;<span class="string">@"__obj"</span>: obj&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>让 OC 对象作为这个 NSDictionary 的一个值，这样在 JS 里这个对象就变成：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;__obj: [OC Object 对象指针]&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;__obj: [OC Object 对象指针]&#125;</span><br></pre></td></tr></table></figure>
 <p>这样就可以通过判断对象是否有 <code>__obj</code> 属性得知这个对象是否表示 OC 对象指针，在 <code>__c</code> 函数里若判断到调用者有 <code>__obj</code> 属性，取出这个属性，跟调用的实例方法一起传回给 OC，就完成了实例方法的调用。</p>
 <h3 id="5-类型转换"><a href="#5-类型转换" class="headerlink" title="5.类型转换"></a>5.类型转换</h3><p>JS 把要调用的类名/方法名/对象传给 OC 后，OC 调用类/对象相应的方法是通过 NSInvocation 实现，要能顺利调用到方法并取得返回值，要做两件事：</p>
 <p>a.取得要调用的 OC 方法各参数类型，把 JS 传来的对象转为要求的类型进行调用。<br>b.根据返回值类型取出返回值，包装为对象传回给 JS。</p>
@@ -493,7 +567,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2016 ccr
+    		&copy; 2018 ccr
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
