@@ -139,18 +139,23 @@
       
         <blockquote><p>最新在折腾项目打包相关工作，包括framework，ipa的打包等，特记录如下。</p>
 </blockquote>
-<h4 id="从源码到ipa包："><a href="#从源码到ipa包：" class="headerlink" title="从源码到ipa包："></a>从源码到ipa包：</h4><ol>
-<li>xcodebuild archive<br>负责将源代码编译成xxx.app，根据实际情况加上-workspace, -project, -configuration, -archivePath等参数</li>
-<li>xcodebuild -exportArchive<br>负责将xxx.app签名并打包成xxx.ipa</li>
+<h4 id="xcode-select-xcrun-xcodebuild"><a href="#xcode-select-xcrun-xcodebuild" class="headerlink" title="xcode-select xcrun xcodebuild"></a>xcode-select xcrun xcodebuild</h4><ol>
+<li>xcode-select 用于选择不同版本的xcode<br>  xcrun -f  find模式，找到开发者工具绝对路径<br> xcrun -r  run模式，找到开发者工具并执行</li>
+<li>xcodebuild [build | clean | archive ]<br> xcodebuild -exportArchive -exportOptionsPlist<br> 一般adhoc | enterprise | appstore 各一个<br> AppStoreExportOptions.plist：method＝app-store，uploadBitcode＝YES，uploadSymbols＝YES，teamID=xxxxxxx<br> AdHocExportOptions.plist：method＝ad-hoc，compileBitcode＝NO，teamID=xxxxxx</li>
 </ol>
+<h4 id="从源码到ipa包："><a href="#从源码到ipa包：" class="headerlink" title="从源码到ipa包："></a>从源码到ipa包：</h4><ol>
+<li>xcodebuild clean</li>
+<li>xcodebuild archive<br>负责将源代码编译成xxx.app，加上-workspace, -project, -configuration, -archivePath等参数</li>
+<li>xcodebuild -exportArchive ，配上-exportOptionsPlist选项进行使用<br>负责将xxx.app签名并打包成xxx.ipa</li>
+</ol>
+<p>ps:  xcrun PackageApplication已不可用</p>
 <h4 id="细化一下步骤："><a href="#细化一下步骤：" class="headerlink" title="细化一下步骤："></a>细化一下步骤：</h4><ol>
 <li>ProcessPCH处理预编译头文件（.pch）生成.pch.pch文件</li>
 <li>CompileC使用clang编译源代码文件（.m .c）生成.o文件</li>
+<li>LD将编译后的源代码文件进行链接操作</li>
 <li>Libtool 创建库，生成.a文件</li>
 <li>CreateUniversalBinary 类似lipo，生成支持不同指令集通用的二进制文件</li>
 <li>PhaseScriptExecution 执行工程文配置的脚本</li>
-<li>LD将编译后的源代码文件进行链接操作</li>
-<li>lipo创建通用库</li>
 <li>ibtool处理storyboard，actool处理Assets文件</li>
 <li>dsymutil生成DSYM文件，其中存储函数地址映射，通过DSYM文件就可以通过崩溃的调用栈得到具体的函数位置，编译排查crash问题。</li>
 <li>codesign进行签名验证</li>
