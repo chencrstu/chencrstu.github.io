@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="靠谱点记笔记好么^_^">
 <meta property="og:description" content="最新在折腾项目打包相关工作，包括framework，ipa的打包等，特记录如下。  从源码到ipa包： xcodebuild archive负责将源代码编译成xxx.app，根据实际情况加上-workspace, -project, -configuration, -archivePath等参数 xcodebuild -exportArchive负责将xxx.app签名并打包成xxx.ipa  细">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-04-24T08:38:40.572Z">
+<meta property="og:updated_time" content="2018-04-25T06:36:30.605Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="编译到出包的过程">
 <meta name="twitter:description" content="最新在折腾项目打包相关工作，包括framework，ipa的打包等，特记录如下。  从源码到ipa包： xcodebuild archive负责将源代码编译成xxx.app，根据实际情况加上-workspace, -project, -configuration, -archivePath等参数 xcodebuild -exportArchive负责将xxx.app签名并打包成xxx.ipa  细">
@@ -144,8 +144,12 @@
 <li>xcodebuild -exportArchive<br>负责将xxx.app签名并打包成xxx.ipa</li>
 </ol>
 <h4 id="细化一下步骤："><a href="#细化一下步骤：" class="headerlink" title="细化一下步骤："></a>细化一下步骤：</h4><ol>
-<li>CompileC使用clang编译每个源代码文件</li>
-<li>LD将编译后的源代码文件进行链接操作，针对不同的机器架构生成不同的机器码</li>
+<li>ProcessPCH处理预编译头文件（.pch）生成.pch.pch文件</li>
+<li>CompileC使用clang编译源代码文件（.m .c）生成.o文件</li>
+<li>Libtool 创建库，生成.a文件</li>
+<li>CreateUniversalBinary 类似lipo，生成支持不同指令集通用的二进制文件</li>
+<li>PhaseScriptExecution 执行工程文配置的脚本</li>
+<li>LD将编译后的源代码文件进行链接操作</li>
 <li>lipo创建通用库</li>
 <li>ibtool处理storyboard，actool处理Assets文件</li>
 <li>dsymutil生成DSYM文件，其中存储函数地址映射，通过DSYM文件就可以通过崩溃的调用栈得到具体的函数位置，编译排查crash问题。</li>
