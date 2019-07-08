@@ -4,20 +4,20 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>opengl概念梳理（二） | 靠谱点记笔记好么^_^</title>
+  <title>Shell基础 | 靠谱点记笔记好么^_^</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="接着上篇学习opengl es光照https://learnopengl-cn.github.io/02%20Lighting/01%20Colors/  经典光照模型反射和投射光的强度决定物体表面的亮度，其中包含不同波长光的比例决定物体表面的色彩。 物体表面光照颜色由入射光、物体材质，材质和光的交互规律共同决定。 漫反射渲染（朗伯反射体）镜面反射渲染（phong光照模型）Blinn-Phong光">
-<meta name="keywords" content="opengl es,图形学">
+  <meta name="description" content="最近在折腾flutter，iOS及Android工程接入Flutter进行混合编译基本搞定。构建出包及静态检测存在一些不同，这里简单梳理一下Shell编程的基础部分，提高编写的脚本质量。  变量shell中变量分为两种，普通变量，环境变量。 环境变量亦称为全局变量，可以在建立它们的shell及其派生出来的任意子进程shell中使用。Shell通过环境变量来确定登陆用户名，命令路径，终端类型，登录目">
+<meta name="keywords" content="shell">
 <meta property="og:type" content="article">
-<meta property="og:title" content="opengl概念梳理（二）">
-<meta property="og:url" content="http://chencrstu.github.io/2016/11/05/opengl概念梳理（二）/index.html">
+<meta property="og:title" content="Shell基础">
+<meta property="og:url" content="http://chencrstu.github.io/2019/07/08/Shell基础/index.html">
 <meta property="og:site_name" content="靠谱点记笔记好么^_^">
-<meta property="og:description" content="接着上篇学习opengl es光照https://learnopengl-cn.github.io/02%20Lighting/01%20Colors/  经典光照模型反射和投射光的强度决定物体表面的亮度，其中包含不同波长光的比例决定物体表面的色彩。 物体表面光照颜色由入射光、物体材质，材质和光的交互规律共同决定。 漫反射渲染（朗伯反射体）镜面反射渲染（phong光照模型）Blinn-Phong光">
+<meta property="og:description" content="最近在折腾flutter，iOS及Android工程接入Flutter进行混合编译基本搞定。构建出包及静态检测存在一些不同，这里简单梳理一下Shell编程的基础部分，提高编写的脚本质量。  变量shell中变量分为两种，普通变量，环境变量。 环境变量亦称为全局变量，可以在建立它们的shell及其派生出来的任意子进程shell中使用。Shell通过环境变量来确定登陆用户名，命令路径，终端类型，登录目">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2016-11-05T13:06:26.000Z">
+<meta property="og:updated_time" content="2019-07-08T06:34:57.717Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="opengl概念梳理（二）">
-<meta name="twitter:description" content="接着上篇学习opengl es光照https://learnopengl-cn.github.io/02%20Lighting/01%20Colors/  经典光照模型反射和投射光的强度决定物体表面的亮度，其中包含不同波长光的比例决定物体表面的色彩。 物体表面光照颜色由入射光、物体材质，材质和光的交互规律共同决定。 漫反射渲染（朗伯反射体）镜面反射渲染（phong光照模型）Blinn-Phong光">
+<meta name="twitter:title" content="Shell基础">
+<meta name="twitter:description" content="最近在折腾flutter，iOS及Android工程接入Flutter进行混合编译基本搞定。构建出包及静态检测存在一些不同，这里简单梳理一下Shell编程的基础部分，提高编写的脚本质量。  变量shell中变量分为两种，普通变量，环境变量。 环境变量亦称为全局变量，可以在建立它们的shell及其派生出来的任意子进程shell中使用。Shell通过环境变量来确定登陆用户名，命令路径，终端类型，登录目">
   
     <link rel="alternative" href="/atom.xml" title="靠谱点记笔记好么^_^" type="application/atom+xml">
   
@@ -119,7 +119,7 @@
 </nav>
 
       <div class="body-wrap">
-        <article id="post-opengl概念梳理（二）" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Shell基础" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -129,7 +129,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      opengl概念梳理（二）
+      Shell基础
     </h1>
   
 
@@ -137,27 +137,24 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote><p>接着上篇学习opengl es光照<br><a href="https://learnopengl-cn.github.io/02%20Lighting/01%20Colors/" target="_blank" rel="noopener">https://learnopengl-cn.github.io/02%20Lighting/01%20Colors/</a></p>
+        <blockquote><p>最近在折腾flutter，iOS及Android工程接入Flutter进行混合编译基本搞定。<br>构建出包及静态检测存在一些不同，这里简单梳理一下Shell编程的基础部分，提高编写的脚本质量。</p>
 </blockquote>
-<h4 id="经典光照模型"><a href="#经典光照模型" class="headerlink" title="经典光照模型"></a>经典光照模型</h4><p>反射和投射光的强度决定物体表面的亮度，其中包含不同波长光的比例决定物体表面的色彩。</p>
-<p>物体表面光照颜色由入射光、物体材质，材质和光的交互规律共同决定。</p>
-<p>漫反射渲染（朗伯反射体）<br>镜面反射渲染（phong光照模型）<br>Blinn-Phong光照模型<br>全局光照模型</p>
-<h4 id="颜色-RGB"><a href="#颜色-RGB" class="headerlink" title="颜色(RGB)"></a>颜色(RGB)</h4><p>物体颜色vec3*光照颜色vec3    =    反射颜色（看到的颜色）vec3</p>
-<h4 id="冯氏光照模型"><a href="#冯氏光照模型" class="headerlink" title="冯氏光照模型"></a>冯氏光照模型</h4><p>环境光照     月亮、来自远处的光     全局照明算法（开销高傲、算法复杂）<br>漫反射     发光物对物体的方向性影响<br>镜面光照     光泽物体出现的亮点，通常为光线颜色</p>
-<h4 id="材质（根据环境光照系数、漫反射系数、镜面光照系数定义、镜面高光元素）系统"><a href="#材质（根据环境光照系数、漫反射系数、镜面光照系数定义、镜面高光元素）系统" class="headerlink" title="材质（根据环境光照系数、漫反射系数、镜面光照系数定义、镜面高光元素）系统"></a>材质（根据环境光照系数、漫反射系数、镜面光照系数定义、镜面高光元素）系统</h4><p>光线（针对材质不同系数具有不同的强度）<br>光照贴图 （每个像素点的漫反射系数、镜面光照系数不同）</p>
-<h4 id="投光物"><a href="#投光物" class="headerlink" title="投光物"></a>投光物</h4><p>定向光     光源距离足够远，所有光线可以近似的看做平行<br>点光     向所有方向发射光线，具有衰减特性<br>聚光     向特定方向发射光线<br>平滑/软化边缘，具有内圆锥、外圆锥</p>
+<h4 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h4><p>shell中变量分为两种，普通变量，环境变量。</p>
+<p>环境变量亦称为全局变量，可以在建立它们的shell及其派生出来的任意子进程shell中使用。Shell通过环境变量来确定登陆用户名，命令路径，终端类型，登录目的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"># 启动时读取当前默认shell的配置文件，如zsh默认读取~/.zshrc文件中配置的环境变量</span><br><span class="line">env # 查看当前环境变量</span><br><span class="line">env | sed &apos;s/=.*$//&apos; | grep -v &apos;^_$&apos; #仅查看定义的变量</span><br><span class="line"></span><br><span class="line"># 环境变量定义</span><br><span class="line">export HTTP_PROXY=192.168.1.23:1700</span><br><span class="line"></span><br><span class="line"># 常用环境变量</span><br><span class="line">echo $SHELL # 当前使用的shell类型</span><br><span class="line">echo $UID # 当前用户UID，超级管理员为0</span><br><span class="line">echo $PATH # 可执行程序搜索列表</span><br><span class="line">echo #LINENO # 调试用，用于显示脚本中当前执行的命令的行号。</span><br><span class="line">echo $# # 命令行参数或位置参数的数量</span><br><span class="line">echo $* # 传递给脚本或函数的所有参数，被双引号包含会一次输出参数</span><br><span class="line">echo $@ # 传递给脚本或函数的所有参数，被双引号包含分开输出参数</span><br><span class="line">echo $- # 传递给shell脚本的执行标志</span><br><span class="line">echo $? # 最近一次执行的命令或shell脚本的出口状态</span><br><span class="line">echo $$ # shell脚本里面的进程ID。Shell脚本经常使用 $$ 变量组织临时文件名，确保文件名的唯一性。</span><br><span class="line">echo $_ # 在shell开始运行时，变量的初始值为shell或其执行的shell脚本的绝对路径名，之后就是最近执行的命令的最后一个选项或参数等。</span><br><span class="line">echo &amp;! # 最近运行的一个后台进程的PID</span><br></pre></td></tr></table></figure>
+<p>普通变量亦称为局部变量，只能在创建它们的shell函数或shell脚本中使用。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 所有变量均为字符串</span><br><span class="line"># 变量定义</span><br><span class="line">variable=&quot;hello world&quot;</span><br><span class="line"></span><br><span class="line"># 将命令结果赋值给变量</span><br><span class="line">variable=`command`</span><br><span class="line">variable=$(command)</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2016/11/05/opengl概念梳理（二）/" class="archive-article-date">
-  	<time datetime="2016-11-05T09:10:19.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-05</time>
+      <a href="/2019/07/08/Shell基础/" class="archive-article-date">
+  	<time datetime="2019-07-08T03:28:49.000Z" itemprop="datePublished"><i class="icon-clock"></i>2019-07-08</time>
 </a>
       
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/opengl-es/">opengl es</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/图形学/">图形学</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell/">shell</a></li></ul>
 	</div>
 
       
@@ -170,18 +167,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2016/12/09/泰国行/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          泰国行
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/10/24/opengl概念梳理/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">opengl概念梳理</div>
+    <a href="/2018/04/24/编译到出包的过程/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">编译到出包的过程</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -211,6 +199,26 @@
 
 
 
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Shell基础" data-title="Shell基础" data-url="http://chencrstu.github.io/2019/07/08/Shell基础/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
 
 
